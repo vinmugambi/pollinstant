@@ -1,0 +1,25 @@
+{
+  "name": "Pollista",
+  "version": "1.0.0",
+  "private": true,
+  "main": "src/application.js",
+  "scripts": {
+    "start": "node src/application.js"
+  },
+  "dependencies": {
+    "body-parser": "~1.8.1",
+    "express": "~4.9.0",
+    "mongoose": "3.8.x",
+    "morgan": "~1.3.0",
+    "passport": "0.2.x",
+    "passport-jwt": "1.0.x",
+    "express-handlebars": "*",
+    "jsonwebtoken": "*",
+    "node-schedule": "*",
+    "password-hash-and-salt": "*",
+    "shortid": "*"
+  },
+  "devDependencies":{
+    "nodemon": "*"
+  }
+}

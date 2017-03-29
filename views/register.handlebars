@@ -1,0 +1,219 @@
+<div class="container">
+
+	<div id="reg" style="">
+		<div class="col-md-offset-2">
+			<h3>Register For A New Account</h3>
+		</div>
+	   
+		<form class="form" id="register" action="">
+		    
+			<div class="row">
+				<div class="col-md-1 col-md-offset-1">
+					<label for="role">Account Type</label>
+				</div>
+				<div class="col-md-6">
+					<div class="input-group">
+						<span class="input-group-addon"><span class="glyphicon glyphicon-registration-mark"></span></span>
+						<select type="text" name="role" id="role" class="role form-control " >
+							<option disabled selected hidden>Pick the type of account you want</option>
+							<option>Client</option>
+							<option>Voter</option>
+						</select>
+					</div>
+				</div>
+				<div class="col-md-4 text-left" id="name-error">
+					<label class="error" for="role" generated="true" style=""></label>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-1 col-md-offset-1">
+					<label for="firstName"> FirstName </label>
+				</div>
+				<div class="col-md-6">
+					<div class="input-group">
+						<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+						<input type="text" name="name" id="name" class="name form-control " placeholder="Enter Your First Name" />
+					</div>
+				</div>
+				<div class="col-md-4 text-left" id="name-error">
+					<label class="error" for="name" generated="true" style=""></label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-1 col-md-offset-1">
+					<label for="gender"> Gender </label>
+				</div>
+				<div class=" col-md-6">
+					<div class="input-group">
+						<span class="input-group-addon"><span class="glyphicon glyphicon-sunglasses"></span></span>
+						<select class="form-control" name="gender" id="gender" placeholder="" required>
+                          <option disabled selected hidden style="color:gray"> Pick Your Gender</option>
+                          <option> Male </option>
+				          <option> Female </option>
+					</select>
+					</div>
+				</div>
+				<div class="col-md-4" id="sex-error">
+					<label class="error" for="gender" generated="true" style=""></label>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-1 col-md-offset-1">
+					<label for="dob"> Date Of Birth </label>
+				</div>
+				<div class=" col-md-6">
+					<div class="input-group date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+						<span class="input-group-addon "><span class="glyphicon glyphicon-calendar"></span></span>
+						{{! has bug}}
+						<input class="form-control" size="16" type="text" name="dob" id="dob" placeholder="[DD/MM/YYYY] or [date monthName year]"
+							required>
+						<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+					</div>
+				</div>
+				<div class="col-md-4" id="dot-error">
+					<label class="error" for="dob" generated="true" style=""></label>
+				</div>
+			</div>
+
+
+			<div class="row">
+				<div class="col-md-1 col-md-offset-1">
+					<label for="education"> Education</label>
+				</div>
+				<div class=" col-md-6">
+					<div class="input-group">
+						<span class="input-group-addon "><span class="glyphicon glyphicon-education"></span></span>
+						<select class="form-control" name="education" id="education">					
+						<option disabled hidden selected>Highest Level Completed</option>
+						<option>No Education</option>
+						<option>Primary Education</option>
+						<option>Secondary Education</option>
+						<option>Tertiary Education</option>
+					</select>
+					</div>
+				</div>
+				<div class="col-md-4" id="edu-error">
+					<label class="error" for="education" generated="true" style=""></label>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-1 col-md-offset-1">
+					<label for="county"> County </label>
+				</div>
+				<div class=" col-md-6">
+					<div class="input-group">
+						<span class="input-group-addon"><span class="glyphicon glyphicon-home"></span></span>
+						<select class="form-control" name="county" id="county">	
+                        <option disabled selected hidden>Select Your Current County</option>
+						<option id="0">Nairobi</option>
+						<option id="1">Makueni</option>
+						<option id="2">Nyeri</option>
+					</select>
+					</div>
+				</div>
+				<div class="col-md-4" id="county-error">
+					<label class="error" for="county" generated="true" style=""></label>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-1 col-md-offset-1">
+					<label for="mobile">Mobile</label>
+				</div>
+				<div class="col-md-6">
+					<div class="input-group">
+						<span class="input-group-addon"><span class="glyphicon glyphicon-phone"></span></span>
+						<input type="text" name="mobile" id="mobile" class="form-control" placeholder="Number Format 07xx xxx xxx" required />
+					</div>
+				</div>
+				<div class="col-md-4" id="mobile-error">
+					<label class="error" for="mobile" generated="true" style=""></label>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-1 col-md-offset-1">
+					<label for="email"> Email </label>
+				</div>
+				<div class="col-md-6">
+					<div class="input-group email">
+						<span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
+						<input type="email" name="email" id="email" class="form-control" placeholder="Enter Your Email Adress" required />
+					</div>
+				</div>
+				<div class="col-md-4" id="email-error">
+					<label class="error" for="email" generated="true" style=""></label>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-1 col-md-offset-1">
+					<label for="password"> Password </label>
+				</div>
+				<div class="col-md-6">
+					<div class="input-group">
+						<span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+						<input type="password" name="password" id="password" class="form-control" placeholder="Enter Your Password" required />
+					</div>
+				</div>
+				<div class="col-md-4" id="pass-error">
+					<label class="error" for="password" generated="true" style=""></label>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-1 col-md-offset-1">
+					<label for="confirm password"> Confirm Password </label>
+				</div>
+				<div class=" col-md-6">
+					<div class="input-group">
+						<span class="input-group-addon "><span class="glyphicon glyphicon-lock"></span></span>
+						<input type="password" name="confPass" id="confPass" class="form-control" placeholder="Re-Enter Password" required/>
+					</div>
+				</div>
+				<div class="col-md-4" id="conf-error">
+					<label class="error" for="confPass" generated="true" style="color: "></label>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-1 col-md-offset-1">
+					<label for="agree"> Agreement </label>
+				</div>
+				<div class=" col-md-1">
+					<div class="input-group large">
+						<input id="agree" class="checkbox checkbox-primary" type="checkbox" name="agree">
+					</div>
+				</div>
+				<div class="col-md-5">
+					By clicking register you agree to our terms of service and privacy
+				</div>
+				<div class="col-md-4" id="conf-error">
+					<label class="error" for="agree" generated="true" style=""></label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-offset-1 col-md-7">
+					<div class="pull-left checkbox checkbox-primary" style="margin-top: 1.4em;">
+						Already has an account <a href="/login"> Login </a>
+					</div>
+					<div class="input-group pull-right" style="margin-top: 0.8em;">
+						<button type="submit" id="register" class="btn btn-primary btn-lg">Register</button>
+					</div>
+				</div>
+			</div>
+			 
+			 <div class="row">
+				<div class="col-md-offset-1 col-md-7">
+					<div class="pull-left error-log" id="error-register" style="margin-top: 1.4em; color: dark-red">
+					     {{! errors go here}}
+					</div>
+				</div>
+			</div>
+
+		</form>
+	</div>
+</div>

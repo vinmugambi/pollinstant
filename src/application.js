@@ -5,24 +5,34 @@ const express = require('express'),
   path = require('path'),
   passport = require("passport"),
   logger = require('morgan'),
+  cookieParser=require('cookie-parser'),
+  session=require("cookie-session"),
+  LocalStrategy=require("passport-local").Strategy,
+  User=require("./models/User"),
+  config=require("./config"),
   app = express();
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
-app.set('port', process.env.PORT || 4000);
+if ( process.env.NODE_ENV === "production")  app.set('port', process.env.PORT || config.prod.port);
+else app.set('port', process.env.PORT || config.dev.port);
 app.use(express.static(path.join(__dirname, '../public')));
-
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({
   extended: false
 }));
-
 app.use(bodyParser.json());
-app.use(passport.initialize());
-require("./config/passport")(passport);
-
-//app.use(helmet());// security
+// app.use(helmet());
 app.disable('x-powered-by')
+
+app.use(cookieParser());
+app.use(session({keys: ["hilueWEiut0270","lwtuyquy88HYgTtwh","..."]}));
+app.use(passport.initialize());
+//require("./config/passport")(passport);
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 //enable CORS
 app.use(function (req, res, next) {
@@ -32,20 +42,28 @@ app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Credentials", "true");
   next();
 });
+
+app.use(function(req, res, next){
+  res.locals.user= req.user;
+  next();
+});
 // Connect mongoose
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/pollista', function (err) {
+if (process.env.NODE_ENV=="production") mongoose.connect(config.prod.dbUrl);
+else {
+  mongoose.connect(config.dev.dbUrl, function (err) {
   if (err) {
     console.log('Could not connect to mongodb on localhost. Ensure that you have mongodb running on localhost and mongodb accepts connections on standard ports!');
   } else {
     console.log('Connection to MongoDB server has been successfully established')
   }
 });
+}
 
-app.use("/api", function (req, res, next) {
-  console.log(req.get("Authorization"), req.user);
-  next();
-})
+// app.use("/api", function (req, res, next) {
+//   console.log(req.get("Authorization"));
+//   next();
+// })
 
 require('./routes/api')(app);
 require('./routes/ui')(app);
@@ -56,11 +74,11 @@ app.use(function (req, res) {
   res.render('404');
 });
 // custom 500 page
-app.use(function (err, req, res, next) {
+app.use(function (err, req, res) {
   console.error(err.stack);
   res.status(500);
   res.render('500');
 });
-
+var url= (process.env.NODE_ENV=="production")? config.prod.url: config.dev.url
 app.listen(app.get('port'));
-console.log("Application is running on http://127.0.0.1:" + app.get('port'));
+console.log("Application is running on %s:%s ",url,app.get('port'));

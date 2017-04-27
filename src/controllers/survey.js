@@ -1,4 +1,5 @@
 const Survey = require('../models/Survey'),
+     email=require("./email"),
   schedule = require('node-schedule');
 
 function setDates(startDate, endDate, surveyId) {
@@ -15,7 +16,8 @@ function setDates(startDate, endDate, surveyId) {
 
     schedule.sheduleJob(endDate, function () {
       Survey.findById(surveyId, function (err, survey) {
-        if (err) { console.log("Setting Start Date Failed") }
+        if (err) {
+           console.log("Setting Start Date Failed") }
         else {
           survey.available = false;
           survey.save();
@@ -30,9 +32,9 @@ function setDates(startDate, endDate, surveyId) {
 
 exports.clientList = function (req, res) {
   if (!req.user || req.user.role !== 'Client') {
-    console.log(req.user);
+    //console.log(req.user,"survey.js");
     res.json({
-      sucess: false,
+      success: false,
       message: "You are not authorised to view this resource. Login to your client account to continue"
     })
   }
@@ -40,7 +42,7 @@ exports.clientList = function (req, res) {
     Survey.find({ owner: req.user._id }, 'pollDescription available totalParticipants', function (err, surveys) {
       if (err) {
         res.json({
-          sucess: false,
+          success: false,
           err
         });
       } else {
@@ -54,16 +56,15 @@ exports.clientList = function (req, res) {
     });
   }
 }
-
 exports.userList = function (req, res) {
   if (!req.user) {
-    console.log(req.user);
     res.json({
-      sucess: false,
+      success: false,
       message: "You are not authorised to view this resource. Login to your account to continue"
     })
   }
   else {
+    //console.log(req.user,"Survey.js")
     let gender = req.user.meta.sex,
       age = req.user.meta.age,
       edu = req.user.meta.educationLevel,
@@ -75,7 +76,7 @@ exports.userList = function (req, res) {
       [
         {
           $or:
-          [{ targetSex: gender }, { targetSex: "all" }]
+          [{ targetSex: gender }, { targetSex: "All" },{targetSex: "all"}]
         },
         {
           $or:
@@ -111,7 +112,7 @@ exports.userList = function (req, res) {
             success: true,
             owner: false,
             message: "Here is a list of surveys you qualify toparticiate",
-            surveys: surveys
+            surveys
           });
         }
       });
@@ -122,7 +123,7 @@ exports.userList = function (req, res) {
 exports.create = function (req, res) {
   if (!req.user || req.user.role !== 'Client') {
     res.json({
-      sucess: false,
+      success: false,
       message: "You are not authorised to perform this action. Login to your client account to continue"
     })
   }
@@ -144,7 +145,7 @@ exports.create = function (req, res) {
     survey.save(function (err, survey) {
       if (err) {
         res.json({
-          sucess: false,
+          success: false,
           message: err
         });
       }
@@ -153,7 +154,17 @@ exports.create = function (req, res) {
           success: true,
           message: `Survey ${req.body.pollDescription} has been successfully created`
         });
-        setDates(req.body.startDate, req.body.endDate, survey._id)
+        setDates(req.body.startDate, req.body.endDate, survey._id);
+        let message={
+            subject: "SURVEY CREATION",
+            text: `Survey ${req.body.pollDescription} has been successfully created and our users will be
+            allowed to vote from ${req.body.startDate} to ${req.body.endDate}`
+        }
+        email(req.user.username,message,function(err,notification){
+          if (err) {
+            console.log(err)
+          }else console.info(notification)
+        })
       }
     }
     );
@@ -164,7 +175,7 @@ exports.create = function (req, res) {
 exports.vote = function (req, res) {
   if (!req.user) {
     res.json({
-      sucess: false,
+      success: false,
       message: "You are not authorised to perform this action. Login to your client account to continue"
     })
   }
@@ -173,11 +184,11 @@ exports.vote = function (req, res) {
 
     Survey.findById(id, function (err, survey) {
       if (err) {
-        res.json({ sucess: false, message: err.message });
+        res.json({ success: false, message: err.message });
         return;
       } else {
         if (req.user._id == survey.owner) {
-          res.json({ sucess: false, message: `You are not allowed to poll in your own survey` })
+          res.json({ success: false, message: `You are not allowed to poll in your own survey` })
         } else {
           if (survey.participants.indexOf(req.user._id) !== -1) {
             res.json({ success: false, message: "You are not allowed to poll twice" })
@@ -202,7 +213,7 @@ exports.vote = function (req, res) {
             survey.participants.push(req.user.id)
             survey.save(function (err) {
               if (err) res.json({ success: false, err })
-              res.json({ sucess: true, message: "You have successfully polled in poll with id " + id })
+              else res.json({ success: true, message: "You have successfully polled in poll with id " + id })
             })
           }
         }
@@ -214,17 +225,17 @@ exports.vote = function (req, res) {
 exports.view = function (req, res) {
   if (!req.user) {
     res.json({
-      sucess: false,
+      success: false,
       message: "You are not authorised to perform this action. Login to your client account to continue"
     })
   }
   else {
     Survey.findById(req.params.id, function (err, survey) {
       if (err) {
-        res.json({ sucess: false, err })
+        res.json({ success: false, err })
       } else {
         if (survey.owner !== req.user.id && survey.available == false) {
-          res.json({ sucess: false, message: "You are not allowed to view this poll" })
+          res.json({ success: false, message: "You are not allowed to view this poll" })
         } else {
           res.json({ success: true, survey })
         }
@@ -236,7 +247,7 @@ exports.view = function (req, res) {
 exports.avail = function (req, res) {
   if (!req.user || req.user.role !== 'Client') {
     res.json({
-      sucess: false,
+      success: false,
       message: "You are not authorised to perform this action. Login to your client account to continue"
     })
   } else {
@@ -244,13 +255,13 @@ exports.avail = function (req, res) {
     Survey.findById(id, function (err, survey) {
       if (err) {
         res.json({
-          sucess: false,
+          success: false,
           err
         })
       } else {
         if (survey.owner !== req.user._id) {
           res.json({
-            sucess: false,
+            success: false,
             message: `You must be the owner of the poll to change it`
           })
         } else {
@@ -258,11 +269,12 @@ exports.avail = function (req, res) {
           survey.save(function (err) {
             if (err) {
               res.json({
-                sucess: false, err
+                success: false, err
               });
             } else {
+
               res.json({
-                sucess: true,
+                success: true,
                 message: `Survey by id ${id} has been availed for voting to voters`
               });
             }
@@ -276,7 +288,7 @@ exports.avail = function (req, res) {
 exports.setVisible = function (req, res) {
   if (!req.user || req.user.role !== 'Client') {
     res.json({
-      sucess: false,
+      success: false,
       message: "You are not authorised to perform this action. Login to your client account to continue"
     })
   } else {
@@ -284,13 +296,13 @@ exports.setVisible = function (req, res) {
     Survey.findById(id, function (err, survey) {
       if (err) {
         res.json({
-          sucess: false,
+          success: false,
           err
         })
       } else {
         if (survey.owner !== req.user._id) {
           res.json({
-            sucess: false,
+            success: false,
             message: `You must be the owner of the poll to change it`
           })
         } else {
@@ -298,11 +310,11 @@ exports.setVisible = function (req, res) {
           survey.save(function (err) {
             if (err) {
               res.json({
-                sucess: false, err
+                success: false, err
               });
             } else {
               res.json({
-                sucess: true,
+                success: true,
                 message: `The results of survey by id ${id} are visible to voters`
               });
             }

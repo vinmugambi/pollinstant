@@ -14,12 +14,15 @@ module.exports = function (app) {
     router.get('/login', function (req, res) {
         res.render('login')
     });
-    router.get('/dashboard', function (req, res) {
-        if (!req.user) {
-            res.redirect('/login')
-        } else {
-            res.render('dashboard', { layout: 'auth' })
-        }
-    })
+    router.get('/verify', function (req, res) {
+        res.render('verify')
+    });
+    router.get('/:type(dashboard|finish|add|create)', function (req, res) {
+        res.render('dashboard')
+    });
+    router.get("/:type(vote|view)/:id", function (req, res) {
+        res.render('dashboard')
+    });
+
     app.use('/', router);
 }

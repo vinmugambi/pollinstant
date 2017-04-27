@@ -7,14 +7,12 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title></title>
 
-	<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
-	<link rel="stylesheet" href="custom.css">
-	<link rel="stylesheet" href="bootstrap-datetimepicker.min.css">
-
-	<!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+	<link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/styles/custom.css">
+	<link rel="stylesheet" href="/styles/index.css">
+	<link rel="stylesheet" href="/styles/react-datetime.css">
+	<link rel="stylesheet" href="/styles/react-spinner.css">
+	<link rel="stylesheet" href="/styles/react-select.min.css">
 </head>
 
 <body>
@@ -28,7 +26,11 @@
 			<ul class="nav navbar-nav navbar-right">
 				<li id="ios"><a href="/aboutus"><strong>Our Services</strong></a></li>
 				<li id="svn"><a href="/"><strong>Community</strong></a></li>
+				{{#if user}}
+				<li id="svn"><a href="/login"><strong>Logout</strong></a></li>
+				{{else}}
 				<li id="svn"><a href="/login"><strong>Login</strong></a></li>
+				{{/if}}
 			</ul>
 		</div>
 	</nav>
@@ -37,37 +39,36 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-4 col-xs-12 col-md-6 col-sm-6">
-					<span><small>Hey there</small></span><br/>
-					<span><small>Hey there</small></span><br/>
-					<span><small>Hey there</small></span>
+					<a href="/"><span><small>Our Services</small></span></a><br/>
+					<a href="/"><span><small>Home</small></span></a><br/>
 				</div>
 				<div class="col-lg-4 col-xs-12 col-md-6 col-sm-6">
-					<span><small>Hey there</small></span><br/>
-					<span><small>Hey there</small></span><br/>
-					<span><small>Hey there</small></span>
+					<span>Contact Us</span><br/>
+					<span><small>070348928/020-490209</small></span><br/>
+					<span><small>Box 3478-10944 Nairobi</small></span><br/>
+					<span><small>Kindaruma House Muindi Mbingu Street</small></span>
 				</div>
 				<div class="col-lg-4 col-xs-12 col-md-6 col-sm-6">
-					<span><small>Hey there</small></span><br/>
-					<span><small>Hey there</small></span><br/>
-					<span><small>Hey there</small></span>
+					{{#if user}}
+					<a href="/auth/logout"><span><small>Logout</small></span></a><br/>
+					 {{else}}
+					<a href="/login"><span><small>Login</small></span></a><br/>
+					{{/if}}
+					<a href="/"><span><small>Settings</small></span></a><br/>
 				</div>
 
 			</div>
 			<div class="row">
-				<div class="col-lg-12 col-lg-offset-5">
-					<p><small>Copyright pollista 2017</small></p>
+				<div>
+					<p style="text-align: center; color: aqua"><small>Copyright pollista 2017</small></p>
 				</div>
 			</div>
 		</div>
 	</footer>
-	<script src="jquery.min.js"></script>
-	<script src="jquery.validate.min.js"></script>
-	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-	<script src="bootstrap-datetimepicker.min.js"></script>
-	<script type="text/javascript" src="logic.js"></script>
-	<script>
-		
-	</script>
+	<script src="/javascript/jquery.min.js"></script>
+	<script src="/javascript/jquery.validate.min.js"></script>
+	<script src="/javascript/bootstrap-datetimepicker.min.js"></script>
+	<script src="/javascript/logic.js"></script>
+	<script type="text/javascript" src="/javascript/main.b13260d6.js"></script>
 </body>
-
 </html>

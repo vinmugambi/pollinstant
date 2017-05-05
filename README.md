@@ -1,9 +1,9 @@
-#Overview
+# Overview
 
 This is a CRUD web application that enables registered users to create polls/surveys for other users to respond. Technologies used include nodejs, mongodb, reactJs, jquery.
 
-## installation
-###prerequisites
+## Installation
+### Prerequisites
 
 node version 6.x
 npm version 3.x

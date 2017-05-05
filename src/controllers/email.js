@@ -1,6 +1,6 @@
 const nodemailer=require("nodemailer");
 
-var pass=process.env.E_PASS;
+var pass = process.env.epass;
 var transporter=nodemailer.createTransport({
 	service: "gmail",
 	auth:{
@@ -10,6 +10,7 @@ var transporter=nodemailer.createTransport({
 })
 
 module.exports= function(recepients,message,callback){
+	console.log(pass)
 	let mailOptions= {
 		from: `"Vincent Mugambi", <vinmugambi17@gmail.com>`,
 		to: recepients,

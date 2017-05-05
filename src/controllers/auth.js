@@ -34,7 +34,9 @@ exports.create = function (req, res) {
                   text: `Your VERIFICATION code is ${account.verificationCode}. The code expires in 20 minutes`
                 }
                 email(account.username,message,function(err,notification){
-                  if (err) console.error(err)
+                  if (err) {
+                    res.status(500);
+                  }
                   else {
                     console.log(notification)
                     res.status(200).json({success: true, message: `Enter the verification code sent to ${account.username}`,email:account.username })

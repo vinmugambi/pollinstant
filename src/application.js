@@ -48,6 +48,11 @@ app.use(function(req, res, next){
 // Connect mongoose
 mongoose.Promise = global.Promise;
 var dbUri= process.env.MONGO_URL||"mongodb://localhost/pollista";
+
+app.use(function(req,res,next){
+  console.log(dbUri,process.env.epass);
+  next()
+})
 mongoose.connect(dbUri, function (err) {
   if (err) {
     console.log('Could not connect to mongodb on localhost. Ensure that you have mongodb running on localhost and mongodb accepts connections on standard ports!');

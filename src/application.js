@@ -9,7 +9,6 @@ const express = require('express'),
   session=require("cookie-session"),
   LocalStrategy=require("passport-local").Strategy,
   User=require("./models/User"),
-  config=require("./config"),
   app = express();
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
@@ -76,4 +75,4 @@ app.use(function (err, req, res) {
   res.render('500');
 });
 app.listen(app.get('port'));
-console.log("Application is running on %s ",app.get('port'));
+console.log("Application is running on port %s ",app.get('port'));

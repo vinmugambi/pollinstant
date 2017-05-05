@@ -1,6 +1,6 @@
-
+var apiKey= process.env.API_KEY;
 var options={
-	apiKey: "f80ef4625ced0b688de6b6a37fe80107638bee36a62aeae3866df72fedf35c38",
+	apiKey: apiKey,
 	username: "wambui",
 	format: "json"
 }

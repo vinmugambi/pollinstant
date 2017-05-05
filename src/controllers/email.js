@@ -1,10 +1,11 @@
 const nodemailer=require("nodemailer");
 
+var pass=process.env.E_PASS;
 var transporter=nodemailer.createTransport({
 	service: "gmail",
 	auth:{
 		user: "vinmugambi17@gmail.com",
-		pass: "Mugambi17@"
+		pass: pass
 	}
 })
 

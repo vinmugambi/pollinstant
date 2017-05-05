@@ -14,8 +14,7 @@ const express = require('express'),
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
-if ( process.env.NODE_ENV === "production")  app.set('port', process.env.PORT || config.prod.port);
-else app.set('port', process.env.PORT || config.dev.port);
+app.set('port', process.env.PORT || 3000);
 app.use(express.static(path.join(__dirname, '../public')));
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({
@@ -49,17 +48,14 @@ app.use(function(req, res, next){
 });
 // Connect mongoose
 mongoose.Promise = global.Promise;
-if (process.env.NODE_ENV=="production") mongoose.connect(config.prod.dbUrl);
-else {
-  mongoose.connect(config.dev.dbUrl, function (err) {
+var dbUri= process.env.MONGO_URL||"mongodb://localhost/pollista";
+mongoose.connect(dbUri, function (err) {
   if (err) {
     console.log('Could not connect to mongodb on localhost. Ensure that you have mongodb running on localhost and mongodb accepts connections on standard ports!');
   } else {
     console.log('Connection to MongoDB server has been successfully established')
   }
 });
-}
-
 // app.use("/api", function (req, res, next) {
 //   console.log(req.get("Authorization"));
 //   next();
@@ -79,6 +75,5 @@ app.use(function (err, req, res) {
   res.status(500);
   res.render('500');
 });
-var url= (process.env.NODE_ENV=="production")? config.prod.url: config.dev.url
 app.listen(app.get('port'));
-console.log("Application is running on %s:%s ",url,app.get('port'));
+console.log("Application is running on %s ",app.get('port'));

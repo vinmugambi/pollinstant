@@ -5,8 +5,7 @@ This is a CRUD web application that enables registered users to create polls/sur
 ## Installation
 ### Prerequisites
 
-node version 6.x
-npm version 3.x
+node version 6.x, npm version 3.x
 
 To install clone this repository
 ```bash

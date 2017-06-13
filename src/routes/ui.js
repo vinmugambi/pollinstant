@@ -5,8 +5,8 @@ module.exports = function (app) {
         res.render('home');
     });
 
-    router.get('/about', function (req, res) {
-        res.render('about');
+    router.get('/aboutus', function (req, res) {
+        res.render('construction');
     });
     router.get('/register', function (req, res) {
         res.render('register')

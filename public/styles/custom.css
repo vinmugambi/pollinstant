@@ -29,13 +29,18 @@
 		 .container.login{
 			 padding-right: 3%;
 			 padding-left: 3%;
+			 margin-top: 20em;
+			 background: green;
 		 }
         }
 
-
+#root,.container.login,.container.register,.container.error404,.container.construction,.container.verify,.error500{
+   min-height: 53.0em;
+   background: transparent;
+}
 body {
 			padding-top: 0em;
-			background: rgb(33, 32, 32);
+			background: #e6e6e6
 		}
 
 		.display-data {
@@ -102,13 +107,12 @@ body {
 			padding-top: 15px;
 			padding-bottom: 15px;
 			margin-bottom: 10px;
-			/*background-image: url(images/03.jpg);*/
 			background-repeat: no-repeat;
 			background-size: 100%;
 		}
 		.navbar-default {
 			background-color: rgba(6, 10, 10, 0.98);
-			border-color: #222;
+			border-bottom-color: #444
 		}
 
 		.navbar-default .navbar-nav > li > a {
@@ -154,13 +158,15 @@ body {
 		.col-md-5.col-sm-5.col-xs-12.col-md-offset-1{
 			margin-bottom: 10px;
 			padding: 2em 2em;
-			background: #e4e4f2;
+			background: #f6f6fb;
+			border: 1px solid #c4ced5;
 		}
 		.col-md-5.col-sm-5.col-xs-12.second{
 			margin-bottom: 10px;
 			padding: 2em 2em;
-			background: #e4e4f2;
+			background: #f6f6fb;
 			margin-left: 0.5em;
+			border: 1px solid #c4ced5;
 		}
 		.row{
 			margin-bottom: 0.3em;
@@ -203,3 +209,11 @@ body {
 		 select.form-control{
 			 border-radius: 0px;
 		 }
+.glyphicon-wrench,.glyphicon-eye-close{
+	font-size: 3em;
+	color: burlywood
+}
+#twitter{
+	height: 2em;
+	width: 2em
+}

@@ -6,8 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Pollinstant</title>
-
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/react-datetime/2.8.10/css/react-datetime.min.css">
 	<link rel="stylesheet" href="/styles/bootstrap-datetimepicker.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/react-select/0.9.1/react-select.min.css">
@@ -26,7 +25,7 @@
 		<div>
 			<ul class="nav navbar-nav navbar-right">
 				<li id="ios"><a href="/aboutus"><strong>Our Services</strong></a></li>
-				<li id="svn"><a href="/"><strong>Community</strong></a></li>
+				<li id="svn"><a href="/register"><strong>Register</strong></a></li>
 				{{#if user}}
 				<li id="svn"><a href="/auth/logout"><strong>Logout</strong></a></li>
 				{{else}}
@@ -36,11 +35,11 @@
 		</div>
 	</nav>
 	{{{body}}}
-	<footer class="navbar-default navbar-sticky" style="padding: 1.5em 1.5em ">
+	<footer class="navbar-default navbar-sticky" style="padding: 0.5em 1.5em ">
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-4 col-xs-12 col-md-6 col-sm-6">
-					<a href="/"><span><small>Our Services</small></span></a><br/>
+					<a href="/aboutus"><span><small>Our Services</small></span></a><br/>
 					<a href="/"><span><small>Home</small></span></a><br/>
 				</div>
 				<div class="col-lg-4 col-xs-12 col-md-6 col-sm-6">
@@ -48,6 +47,8 @@
 					<span><small>070348928/020-490209</small></span><br/>
 					<span><small>Box 3478-10944 Nairobi</small></span><br/>
 					<span><small>Kindaruma House Muindi Mbingu Street</small></span>
+					<br/>
+					<a href="https://twitter.com/Mugambi_Vin"><img id="twitter" src="/img/twitter.png" align="middle"></img></a>
 				</div>
 				<div class="col-lg-4 col-xs-12 col-md-6 col-sm-6">
 					{{#if user}}
@@ -55,14 +56,9 @@
 					 {{else}}
 					<a href="/login"><span><small>Login</small></span></a><br/>
 					{{/if}}
-					<a href="/"><span><small>Settings</small></span></a><br/>
+					<a href="/aboutus"><span><small>Settings</small></span></a><br/>
 				</div>
 
-			</div>
-			<div class="row">
-				<div>
-					<p style="text-align: center; color: aqua"><small>Copyright pollista 2017</small></p>
-				</div>
 			</div>
 		</div>
 	</footer>

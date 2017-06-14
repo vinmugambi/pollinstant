@@ -6,7 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Pollinstant</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/react-datetime/2.8.10/css/react-datetime.min.css">
 	<link rel="stylesheet" href="/styles/bootstrap-datetimepicker.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/react-select/0.9.1/react-select.min.css">
@@ -16,7 +16,8 @@
 </head>
 
 <body>
-	<nav class="navbar navbar-default navbar-sticky" role="navigation">
+	<div class="container main">
+		<nav class="navbar navbar-default navbar-sticky topnav" role="navigation">
 		<div class="navbar-header text-center">
 			<a class="navbar-brand text-center" href="/">
 				<strong>Pollinstant</strong>
@@ -41,6 +42,9 @@
 				<div class="col-lg-4 col-xs-12 col-md-6 col-sm-6">
 					<a href="/aboutus"><span><small>Our Services</small></span></a><br/>
 					<a href="/"><span><small>Home</small></span></a><br/>
+					{{#if user}}
+					<a href="/auth/logout"><span><small>Logout</small></span></a><br/> {{else}}
+					<a href="/login"><span><small>Login</small></span></a><br/> {{/if}}
 				</div>
 				<div class="col-lg-4 col-xs-12 col-md-6 col-sm-6">
 					<span>Contact Us</span><br/>
@@ -51,12 +55,13 @@
 					<a href="https://twitter.com/Mugambi_Vin"><img id="twitter" src="/img/twitter.png" align="middle"></img></a>
 				</div>
 				<div class="col-lg-4 col-xs-12 col-md-6 col-sm-6">
-					{{#if user}}
-					<a href="/auth/logout"><span><small>Logout</small></span></a><br/>
-					 {{else}}
-					<a href="/login"><span><small>Login</small></span></a><br/>
-					{{/if}}
-					<a href="/aboutus"><span><small>Settings</small></span></a><br/>
+					<div id="end">
+						Invite friends and family to Pollinstant
+						<form id="invite" class="form-vertical">
+							<input type="email" class=" form-control" name="invitee" placeholder="Enter Email"/>
+							<button type="submit" class="btn btn-primary">Invite</button>
+						</form>
+					</div>
 				</div>
 
 			</div>
@@ -67,5 +72,7 @@
 	<script src="/javascript/bootstrap-datetimepicker.min.js"></script>
 	<script src="/javascript/logic.js"></script>
 	<script type="text/javascript" src="/javascript/main.b13260d6.js"></script>
+	</div>
 </body>
+
 </html>
